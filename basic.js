@@ -1,11 +1,13 @@
-require("./routes/db/connect");
 const express = require("express");
 const app = express();
-
 const tasks = require("./routes/task");
+const connectDB = require("./db/connect");
+require("dotenv").config();
 
+// Middleware
 app.use(express.json());
 
+// Routes
 app.get("/hello", (req, res) => {
   res.send("Task Manager Project");
 });
@@ -19,4 +21,14 @@ app.use("/api/v1/tasks", tasks);
 // app.delete("/api/v1/tasks/:id")  -- delete task
 
 const port = 3000;
-app.listen(port, console.log(`Listening on port ${port}...`));
+
+const start = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, console.log(`Listening on port ${port}...`));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+start();
