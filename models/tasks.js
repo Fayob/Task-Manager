@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 
 const TaskSchema = new mongoose.Schema({
-  name: {
+  uname: {
     type: String,
     required: [true, "Must be Provided"],
     trim: true,
     maxlength: [20, "maximum name of 20 character"],
   },
-  completed: {
+  psw: {
     type: String,
-    default: false,
+    required: [true, "input your password"],
+    minlength: [4, "password too short"],
   },
 });
 

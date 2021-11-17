@@ -13,7 +13,7 @@ router.get("/", getAllTasks);
 
 router.post("/", createNewTask);
 
-router.get("/:name", getSingleTask);
+router.get("/:id", getSingleTask);
 
 router.patch("/:id", updateTask);
 
